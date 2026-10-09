@@ -1,5 +1,9 @@
-# Module 1
+# Module 1 Introduction and Local-First Foundations
+#Learning Goals
 
+> Understand file-based storage and data flows.
+> Understand local-first development.
+> Learn the basics of embedded SQLite databases.
 
 > 
 >
