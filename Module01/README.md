@@ -1,11 +1,15 @@
-# Module 1
+# Module 1 Introduction and Local-First Foundations
+#Learning Goals
 
+> Understand file-based storage and data flows.
+> Understand local-first development.
+> Learn the basics of embedded SQLite databases.
 
-> When you start editing this file, remove this description.
+>I want to learn how databases help engineers collect and analyze real-world data to improve system and processes. 
 >
-> Usually the first things you have to document are some inspirations hinting at what
-> you might be able to build in this class, a personal profile description regarding
-> programming expertise, previous MCU knowledge, creative qualities, and expectations
+> 
+> 
+> 
 
 Module description
 
