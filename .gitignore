@@ -1,0 +1,8 @@
+# Local data and secrets stay out of the repository
+.venv/
+*.db
+*.db-journal
+*.duckdb
+*.parquet
+.env
+__pycache__/
