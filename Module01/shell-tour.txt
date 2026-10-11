@@ -1,0 +1,8 @@
+reading
+CREATE TABLE reading(machine TEXT, vib REAL);
+Run Time: real 0.000 user 0.000091 sys 0.000136
+machine  peak
+-------  ----
+cnc-01   1.2 
+cnc-02   2.4 
+Run Time: real 0.000 user 0.000139 sys 0.000115
