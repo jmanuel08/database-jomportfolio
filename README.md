@@ -1,6 +1,6 @@
 Author: Jomarie Chris Manuel
 
-My partner is Sanjay Pachan Maheshwari, [portfolio link](https://github.com/yajnas-crpto/databases_portfolio_sanjay/tree/main)
+My partner is Sanjay Pachan Maheshwari, [portfolio link](https://github.com/yajnas-crpto/databases_portfolio_sanjay)
 Sebastian Emmanuel Soon, [portfolio link](https://github.com/Emannual20/databases-portfolio)
 
 In my team for the final project, I also had the following members:
