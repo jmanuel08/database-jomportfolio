@@ -1,39 +1,42 @@
-Task 8: Publish Data with Datasette
+# Task 8: Publish Data with Datasette
 
-Objective
+## 1. Objective
 
 Publish the telemetry database using Datasette so that the data can be browsed, filtered, and exported through a web browser.
 
-Database
+## 2. Database Overview
 
-Database: telemetry.db
+- **Database:** `telemetry.db`
+- **Table:** `readings`
+- **Total readings:** 172,800
 
-Table: readings
+## 3. Filtered View
 
-Total readings: 172,800
+I filtered the readings table to show records from machine `cnc-02`.
 
-Filtered View
+**Filter:** `machine = cnc-02`
 
-Filter: machine = cnc-02
+[Open the filtered table](http://127.0.0.1:8001/telemetry/readings?machine=cnc-02)
 
-Filtered table URL: http://127.0.0.1:8001/telemetry/readings?machine=cnc-02
+## 4. Single Row
 
-Single Row URL
+I also recorded the URL for an individual row in the readings table.
 
-http://127.0.0.1:8001/telemetry/readings/2
+[Open row 2](http://127.0.0.1:8001/telemetry/readings/2)
 
-Exported CSV
+## 5. Exported CSV
 
-File: filtered_readings.csv
+- **File:** `filtered_readings.csv`
+- **Location:** `Module01/filtered_readings.csv`
+- **Contents:** 100 data rows and one header row.
 
-Location: Module01/filtered_readings.csv
+## 6. Screenshot Evidence
 
-Screenshot Evidence
+- **File:** `datasette-table.png`
+- **Location:** `Module01/pictures/datasette-table.png`
 
-File: datasette-table.png
+The screenshot shows the filtered table for `cnc-02`.
 
-Location: Module01/pictures/datasette-table.png
+## 7. Reflection
 
-Reflection
-
-I learned how to use Datasette to explore and share telemetry data through a web browser. I filtered the readings for cnc-02, exported the results as a CSV file, and recorded the URL of an individual row. This task helped me understand how Datasette makes database information easier to access, organize, and analyze without writing additional SQL queries.
+I learned how to use Datasette to explore and share telemetry data through a web browser. I filtered the readings for `cnc-02`, exported the results as a CSV file, and recorded the URL of an individual row. The CSV file contains 100 data rows, while the database has 57,600 readings for `cnc-02`. This helped me understand how Datasette makes database information easier to access and explore.

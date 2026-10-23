@@ -1,8 +1,36 @@
-reading
+# SQLite Shell Tour
+
+## 1. Create a Table
+
+I created a table named `reading` with two columns: `machine` and `vib`.
+
+```sql
 CREATE TABLE reading(machine TEXT, vib REAL);
-Run Time: real 0.000 user 0.000091 sys 0.000136
-machine  peak
--------  ----
-cnc-01   1.2 
-cnc-02   2.4 
-Run Time: real 0.000 user 0.000139 sys 0.000115
+```
+
+## 2. Query Results
+
+I checked the peak vibration value for each machine.
+
+| Machine | Peak vibration |
+|---|---:|
+| cnc-01 | 1.2 |
+| cnc-02 | 2.4 |
+
+## 3. Execution Time
+
+I used the SQLite timer to check the query execution time.
+
+**First operation:**
+- Real: 0.000 seconds
+- User: 0.000091 seconds
+- System: 0.000136 seconds
+
+**Second operation:**
+- Real: 0.000 seconds
+- User: 0.000139 seconds
+- System: 0.000115 seconds
+
+## 4. Reflection
+
+I created a table named `reading` with machine and vibration columns. I ran a query to check the peak vibration value for each machine. The results showed 1.2 for `cnc-01` and 2.4 for `cnc-02`. I also used the SQLite timer to check the query execution time.
