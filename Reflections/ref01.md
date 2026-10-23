@@ -1,50 +1,38 @@
 # Reflection 1 in Module 1
 
-1. Key Takeaways and Advice
+## 1. Key Takeaways and Advice
 
-What I learned
+### What I Learned
 
-Learned the basics of SQLite and SQL queries.
+- Learned the basics of SQLite and SQL queries.
+- Practiced using `COUNT()`, `AVG()`, `MAX()`, and `GROUP BY` to analyze machine telemetry data.
+- Learned that query results should be checked instead of assuming the code is correct.
+- Realized that learning databases requires patience, practice, and problem-solving.
 
-Practiced using COUNT(), AVG(), MAX(), and GROUP BY to analyze machine telemetry data.
+### My Advice to Other Beginners
 
-Learned that query results should be checked instead of assuming the code is correct.
+- Follow the professor's instructions step by step.
+- Try to understand what each SQL command does instead of only copying code.
+- Test queries and check the results.
+- Ask for help when a task becomes difficult.
 
-Realized that learning databases requires patience, practice, and problem-solving.
+## 2. What Went Well?
 
-My advice to other beginners
+- The professor provided detailed instructions that helped me understand the tasks.
+- Working with telemetry data helped me see how SQL can answer practical questions.
+- I successfully counted **172,800 readings** and compared results across three machines.
+- I explored the SQLite shell and learned how query results can be exported in JSON and CSV formats.
+- ChatGPT helped me understand unfamiliar commands and troubleshoot problems.
 
-Follow the professor's instructions step by step.
+## 3. Challenges and Difficulties
 
-Try to understand what each SQL command does instead of only copying code.
-
-Test queries and check the results.
-
-Ask for help when a task becomes difficult.
-
-2. What Went Well?
-
-The professor provided detailed instructions that helped me understand the tasks.
-
-Working with telemetry data helped me see how SQL can answer practical questions.
-
-I successfully counted 172,800 readings and compared results across three machines.
-
-I explored the SQLite shell and learned how query results can be exported in JSON and CSV formats.
-
-ChatGPT helped me understand unfamiliar commands and troubleshoot problems.
-
-3. Challenges and Difficulties
-
-Learning new database concepts
+### Learning New Database Concepts
 
 Many database terms and SQL commands were new to me because this was my first time working with these tasks.
 
-I sometimes felt confused about how to create tables and which commands to write.
+I sometimes felt confused about how to create tables and which commands to write. I needed more practice to understand the purpose of each command.
 
-I needed more practice to understand the purpose of each command.
-
-Task 5: SQL Island — The Most Challenging Task
+### Task 5: SQL Island — The Most Challenging Task
 
 In my opinion, Task 5 was one of the most challenging tasks because it required me to apply SQL knowledge to solve problems.
 
@@ -56,29 +44,22 @@ When I got stuck, I asked ChatGPT for help and watched YouTube tutorials about s
 
 This task taught me that learning SQL is not only about memorizing commands but also about understanding when and how to use them.
 
-Datasette and exporting results
+### Datasette and Exporting Results
 
 I found it difficult to navigate Datasette and access query results through URLs.
 
-Exporting results into JSON and CSV required additional practice.
+Exporting results into JSON and CSV required additional practice. I learned to test different approaches and verify the output.
 
-I learned to test different approaches and verify the output.
+## 4. Exploration and Problem-Solving
 
-4. Exploration and Problem-Solving
+- Practiced SQL queries to count readings, calculate averages, and find maximum vibration values.
+- Tested different SQLite shell output modes, including box, JSON, and Markdown.
+- Imported telemetry data from a CSV file into SQLite.
+- Created a database backup and used `VACUUM INTO` to create a compact database copy.
+- Used Datasette to explore tables, filter data, and retrieve query results.
+- Checked query outputs to confirm that the results matched my expectations.
 
-Practiced SQL queries to count readings, calculate averages, and find maximum vibration values.
-
-Tested different SQLite shell output modes, including box, JSON, and Markdown.
-
-Imported telemetry data from a CSV file into SQLite.
-
-Created a database backup and used VACUUM INTO to create a compact database copy.
-
-Used Datasette to explore tables, filter data, and retrieve query results.
-
-Checked query outputs to confirm that the results matched my expectations.
-
-5. Interaction with Peers and Instructors
+## 5. Interaction with Peers and Instructors
 
 The professor's detailed task instructions helped me work through the exercises.
 
@@ -88,30 +69,23 @@ I would like to receive feedback from my peers or instructor to improve my under
 
 I want to become more confident in solving database exercises independently.
 
-6. Help, Feedback, and Extra Work
+## 6. Help, Feedback, and Extra Work
 
-Resources that helped me
+### Resources That Helped Me
 
-Professor's instructions: Provided a clear structure for completing the exercises.
+- **Professor's instructions:** Provided a clear structure for completing the exercises.
+- **ChatGPT:** Helped explain SQL commands and troubleshoot problems.
+- **YouTube tutorials:** Helped me understand how to progress through SQL Island.
 
-ChatGPT: Helped explain SQL commands and troubleshoot problems.
+### What I Learned from Using These Resources
 
-YouTube tutorials: Helped me understand how to progress through SQL Island.
+- AI and online tutorials are useful learning aids, but I still need to understand the code myself.
+- Checking query results is important for verifying whether a solution works.
+- Working through errors and unfamiliar tasks helped me improve my problem-solving skills.
 
-What I learned from using these resources
+### My Next Learning Goals
 
-AI and online tutorials are useful learning aids, but I still need to understand the code myself.
-
-Checking query results is important for verifying whether a solution works.
-
-Working through errors and unfamiliar tasks helped me improve my problem-solving skills.
-
-My next learning goals
-
-Write SQL queries with less assistance.
-
-Improve my understanding of database vocabulary and table creation.
-
-Become more comfortable using Datasette and exporting results.
-
-Keep my portfolio organized with clear documentation and evidence of my work.
+- Write SQL queries with less assistance.
+- Improve my understanding of database vocabulary and table creation.
+- Become more comfortable using Datasette and exporting results.
+- Keep my portfolio organized with clear documentation and evidence of my work.
