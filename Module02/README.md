@@ -1,26 +1,26 @@
 # Module 2
 
-We are going to show here notes for Task 1, 2, 3, 4, and 5 to prove
+## Task 1: Reconstruct the ER Model
+Reconstructed the entities, attributes, primary keys, and relationships of the legacy database.
 
-## Task ...
+**Evidence:** [er-audit.md](er-audit.md)
 
-This task was executed by myself.
+## Task 2: Find Integrity Defects
+Used SQL queries to find and prove five integrity defects in the legacy database.
 
-## Task ...
+**Evidence:** [er-audit.md](er-audit.md)
 
-This task was executed by my partner. The implementation was about ... 
-It is [here](https://github.com/partner/iot-portfolio/Module02/Readme.md#task-2).
+## Task 3: Data Contract
+Created and tested a data contract using Pydantic and SQLAlchemy.
 
-## Reflection 2
-[Reflection 2](/Reflections/ref02.md)
+**Evidence:** [contract.py](contract.py), [contract-ddl.sql](contract-ddl.sql), [contract-notes.md](contract-notes.md)
 
-## Task ...
+## Task 4: Model Inheritance
+Compared single-table and separate-table designs.
 
-...
+**Evidence:** [task4-single-table.sql](task4-single-table.sql), [task4-separate-tables.sql](task4-separate-table.sql), [task4-notes.md](task4-notes.md)
 
-If the module is longer than 1 week, you might have several reflections within it. If not, delete this and the following.
+## Task 5: Mermaid ER Diagrams
+Created ER diagrams and tested a music database schema using SQLite.
 
-## Reflection 3
-[Reflection 3](/Reflections/ref03.md)
-
-
+**Evidence:** [mermaid-lab.md](mermaid-lab.md), [task5-music-schema.sql](task5-music-schema.sql)
