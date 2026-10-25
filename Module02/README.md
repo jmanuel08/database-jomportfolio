@@ -18,7 +18,7 @@ Created and tested a data contract using Pydantic and SQLAlchemy.
 ## Task 4: Model Inheritance
 Compared single-table and separate-table designs.
 
-**Evidence:** [task4-single-table.sql](task4-single-table.sql), [task4-separate-tables.sql](task4-separate-table.sql), [task4-notes.md](task4-notes.md)
+**Evidence:** [task4-single-table.sql](task4-single-table.sql), [task4-separate-tables.sql](task4-separate-tables.sql), [task4-notes.md](task4-notes.md)
 
 ## Task 5: Mermaid ER Diagrams
 Created ER diagrams and tested a music database schema using SQLite.
