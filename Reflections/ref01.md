@@ -61,27 +61,27 @@ Exporting results into JSON and CSV required additional practice. I learned to t
 
 ## 5. Interaction with Peers and Instructors
 
-The professor's detailed task instructions helped me work through the exercises.
+The professor's detailed instructions helped me understand the tasks and work through the exercises. I also received help from my groupmates, Sanjay and Sebastian, who supported me with some of the tasks when I encountered difficulties.
 
-I used ChatGPT and YouTube as additional learning resources when I needed clarification.
+Their help made it easier for me to understand certain concepts and continue working on the exercises. I also used ChatGPT and YouTube as additional learning resources whenever I needed clarification.
 
-I would like to receive feedback from my peers or instructor to improve my understanding and portfolio.
-
-I want to become more confident in solving database exercises independently.
+This experience taught me that learning becomes easier when we ask questions, share knowledge, and help one another. I would like to receive more feedback from my classmates and instructor to improve my understanding and become more confident in solving database exercises independently.
 
 ## 6. Help, Feedback, and Extra Work
 
 ### Resources That Helped Me
 
 - **Professor's instructions:** Provided a clear structure for completing the exercises.
+- **Sanjay and Sebastian:** Helped me with some tasks and supported my learning when I encountered difficulties.
 - **ChatGPT:** Helped explain SQL commands and troubleshoot problems.
-- **YouTube tutorials:** Helped me understand how to progress through SQL Island.
+- **YouTube tutorials:** Helped me understand specific parts of SQL Island and other unfamiliar concepts.
 
 ### What I Learned from Using These Resources
 
-- AI and online tutorials are useful learning aids, but I still need to understand the code myself.
+- Asking classmates for help can make difficult tasks easier to understand.
+- AI tools and online tutorials are useful learning aids, but I still need to understand the code myself.
 - Checking query results is important for verifying whether a solution works.
-- Working through errors and unfamiliar tasks helped me improve my problem-solving skills.
+- Learning with the support of others and working through errors helped me improve my problem-solving skills.
 
 ### My Next Learning Goals
 
