@@ -2,6 +2,7 @@ Author: Jomarie Chris Manuel
 
 My partner is Sanjay Pachan Maheshwari, [portfolio link](https://github.com/yajnas-crpto/databases_portfolio_sanjay)
 Sebastian Emmanuel Soon, [portfolio link](https://github.com/Emannual20/databases-portfolio)
+Myo Min Lin, [portfolio link](https://github.com/mmlin801597/databases-portfolio/tree/main)
 
 In my team for the final project, I also had the following members:
 - Rayan Slassi, [portfolio link](https://github.com/rayansls/Databases)
