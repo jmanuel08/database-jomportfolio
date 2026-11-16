@@ -4,6 +4,7 @@
 *.db-journal
 *.duckdb
 *.parquet
+Module06a/report_jobpart.csv
 .env
 __pycache__/
 .DS_Store

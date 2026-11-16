@@ -1,19 +1,34 @@
-Here are all the reflections, one for each class session.
-Make sure you plan some time (<10min) on the day of the session
-to remember interesting points of the session.
+# Module 6a – The Analytical Engine (DuckDB)
 
-They will be named ref01.md to refnn.md
+## Learning Goals
 
-As a reminder, we expect the following in a reflection:
+By the end of this module, I learned how to:
 
-- What is your take-away, what do you want to remember, what would be your advice?
-  Take-away can be small summary, but better outstanding points.
-- What was good?
-- What was difficult, where did you struggle?
-- Was there any good/fun “struggling”/exploration?
-  Any show stoppers – anything where you should reach out to peers or instructors? 
-- How was your interaction with peers/instructors?
-- Help and extra work
-  - Who helped you, gave feedback, was it valuable?
-  - Who did you help, gave feedback to?
-  - Did you present, implement, made a PR, or fix something that was crucial for the class in itself?
+1. Transfer data from SQLite to Parquet using a Python script.
+2. Compare SQLite and DuckDB performance using the same queries, multiple runs, and median results.
+3. Read `EXPLAIN ANALYZE` and identify the main operations and number of rows processed.
+4. Identify situations where DuckDB is not the best choice based on actual performance measurements.
+5. Decide which workloads are suitable for analytical databases and how to keep the data updated.
+
+## Module Contents
+
+| File | Description |
+|---|---|
+| `prepare.py` | Creates a larger historical dataset using the Module 5 database. |
+| `to_parquet.py` | Converts the historical data into Parquet files, including a ZSTD-compressed version. |
+| `race.py` | Compares SQLite and DuckDB query performance. |
+| `plan.py` | Examines query execution plans using `EXPLAIN ANALYZE`. |
+| `boundary.py` | Compares insert and lookup performance between SQLite and DuckDB. |
+| `duckdb-notes.md` | Contains measurements, results, and explanations from the module. |
+| `decision-memo.md` | Presents the recommendation for analytical reporting. |
+
+## Key Findings
+
+- DuckDB was 176.2 times faster than SQLite for the dashboard query.
+- DuckDB was 134.3 times faster for the monthly report.
+- The ZSTD-compressed Parquet file was 2.69 MB, compared with 10.44 MB for the original Parquet file.
+- SQLite performed better for individual inserts and lookups.
+
+## Reflection
+
+[Read my Module 6a Reflection](../Reflections/ref06a.md)

@@ -1,0 +1,6 @@
+# Decision Memo – SQLite and DuckDB
+
+**To:** Lea Winter and Yasmin Kaya  
+**Subject:** Recommendation for Analytical Reporting
+
+I recommend using DuckDB with Parquet for monthly reports and historical data, while keeping SQLite for daily operations and transactions. The dashboard query took 4.9 ms in DuckDB compared with 864.7 ms in SQLite, while the monthly report took 5.6 ms compared with 748.9 ms. The SQLite database was 114 MB, the original Parquet file was 10.44 MB, and the ZSTD-compressed Parquet file was only 2.69 MB. SQLite performed much better for individual inserts and lookups, making it more suitable for small transactional operations. The Parquet file should be refreshed every night after daily operations using an automated scheduled script. The operations team should monitor the last successful refresh and verify the row count and total part price after each update. If the refresh silently fails, reports may use outdated data without anyone noticing. Therefore, a failed refresh should trigger an alert so the team can investigate and restore the latest data.
