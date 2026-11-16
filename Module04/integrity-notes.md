@@ -1,17 +1,14 @@
-# Module 4 — Data Integrity, Constraints & Edge Cases
-## Task A and Task B — Pod Study and Discussion Report
+# Module 4 — Data Integrity and Triggers
 
----
-
-# Task A — Pod Study: Testing Data Integrity
+# Task A — Testing Data Integrity
 
 ## 1. Objective
 
-The objective of this activity was to understand how database constraints protect data integrity. We compared an unconstrained SQLite table with a constrained table and tested how SQLite handles invalid data, duplicate identifiers, incorrect data types, and NULL values.
+The goal of this task was to understand how SQLite protects data using constraints.
 
-## 2. Experiment 1: Unconstrained Table
+## 2. Table Without Constraints
 
-First, we created a table without constraints:
+First, we created a table without constraints.
 
 ```sql
 CREATE TABLE t(
@@ -21,7 +18,7 @@ CREATE TABLE t(
 );
 ```
 
-We inserted three records containing questionable data:
+We inserted three records:
 
 ```sql
 INSERT INTO t VALUES
@@ -30,39 +27,19 @@ INSERT INTO t VALUES
 (2, 'bogus', -500);
 ```
 
-**Actual result:** All three records were accepted without errors.
+**Result:** All three records were accepted.
 
-| Sensor ID | Metric | Value | Observation |
-|---:|---|---:|---|
-| 1 | temp_c | 9000 | Temperature exceeds the intended limit |
-| 1 | temp_c | hot | Text was accepted in a REAL column |
-| 2 | bogus | -500 | Invalid metric and questionable value |
+| Sensor ID | Metric | Value |
+|---|---|---|
+| 1 | temp_c | 9000 |
+| 1 | temp_c | hot |
+| 2 | bogus | -500 |
 
-The query:
+The table accepted all records because it had no constraints.
 
-```sql
-SELECT COUNT(*) FROM t;
-```
+## 3. Table With Constraints and STRICT
 
-Returned:
-
-```text
-3
-```
-
-**Explanation:**
-
-The unconstrained table allowed:
-- Duplicate sensor IDs.
-- Invalid metric names.
-- Values outside the intended range.
-- Text values in a column declared as REAL.
-
-This demonstrates SQLite's flexible typing behavior in ordinary tables. The declared data type does not strictly prevent values of other storage classes from being stored.
-
-## 3. Experiment 2: Constrained and STRICT Table
-
-We replaced the original table with a constrained version:
+Next, we created a table with constraints.
 
 ```sql
 CREATE TABLE t(
@@ -74,45 +51,34 @@ CREATE TABLE t(
 ) STRICT;
 ```
 
-We first inserted a valid record:
+We tested different values.
 
-```sql
-INSERT INTO t VALUES (1, 'temp_c', 41.5);
-```
-
-**Actual result:** Accepted successfully.
-
-We then tested invalid records.
-
-### Testing Results
-
-| Test | Input | Expected | Actual | Constraint |
-|---|---|---|---|---|
-| Invalid temperature | 9000 | Rejected | Rejected | CHECK |
-| Text in REAL column | hot | Rejected | Rejected | STRICT |
-| Invalid metric | humidity | Rejected | Rejected | CHECK |
-| Duplicate sensor ID | 1 | Rejected | Rejected | PRIMARY KEY |
-| NULL metric | NULL | Rejected | Rejected | NOT NULL |
-| NULL value | NULL | Rejected | Rejected | NOT NULL |
-
-### Actual SQLite Error Messages
-
-The following errors were observed during the experiments:
-
-| Test | Actual SQLite error |
+| Test | Result |
 |---|---|
-| Invalid temperature | `CHECK constraint failed: value BETWEEN -273.15 AND 5000 (19)` |
-| Text in REAL column | `cannot store TEXT value in REAL column t.value (19)` |
-| Invalid metric | `CHECK constraint failed: metric IN ('temp_c', 'vib_rms', 'spindle_load') (19)` |
-| Duplicate sensor ID | `UNIQUE constraint failed: t.sensor_id (19)` |
-| NULL metric | `NOT NULL constraint failed: t.metric (19)` |
-| NULL value | `NOT NULL constraint failed: t.value (19)` |
+| Temperature 9000 | Rejected |
+| Text 'hot' in REAL column | Rejected |
+| Invalid metric | Rejected |
+| Duplicate sensor ID | Rejected |
+| NULL metric | Rejected |
+| NULL value | Rejected |
 
-Error code `(19)` indicates a SQLite constraint violation.
+**Actual errors from SQLite:**
 
-## 4. Experiment 3: CHECK Constraint and NULL Values
+- `CHECK constraint failed`
+- `cannot store TEXT value in REAL column`
+- `UNIQUE constraint failed`
+- `NOT NULL constraint failed`
 
-We created a table with a CHECK constraint but without NOT NULL:
+**What I learned:**
+
+- PRIMARY KEY prevents duplicate IDs.
+- NOT NULL does not allow empty values.
+- CHECK checks if a value follows a condition.
+- STRICT checks the data type.
+
+## 4. CHECK and NULL
+
+We created a table with CHECK but without NOT NULL.
 
 ```sql
 CREATE TABLE check_null_test (
@@ -120,29 +86,19 @@ CREATE TABLE check_null_test (
 ) STRICT;
 ```
 
-We inserted NULL:
+Then we inserted NULL:
 
 ```sql
 INSERT INTO check_null_test VALUES (NULL);
 ```
 
-**Actual result:** SQLite accepted the NULL value without an error.
+**Result:** SQLite accepted NULL.
 
-The query:
+This shows that CHECK alone does not prevent NULL values.
 
-```sql
-SELECT * FROM check_null_test;
-```
+## 5. Using NOT NULL and CHECK Together
 
-Displayed an empty-looking value in the result.
-
-**Explanation:**
-
-A CHECK constraint rejects a row when its expression evaluates to FALSE (zero). However, when a comparison involves NULL, the result is NULL (unknown), not FALSE. Therefore, SQLite accepts the row.
-
-## 5. Experiment 4: Combining NOT NULL and CHECK
-
-We created another table with both constraints:
+We created another table:
 
 ```sql
 CREATE TABLE check_null_test_2 (
@@ -150,136 +106,349 @@ CREATE TABLE check_null_test_2 (
 ) STRICT;
 ```
 
-We tested four different inputs:
+We tested different values.
 
-| Input | Expected | Actual | Reason |
-|---:|---|---|---|
-| NULL | Rejected | Rejected | NOT NULL violation |
-| 0 | Rejected | Rejected | CHECK violation |
-| -5 | Rejected | Rejected | CHECK violation |
-| 25.5 | Accepted | Accepted | Valid positive value |
+| Input | Result |
+|---|---|
+| NULL | Rejected |
+| 0 | Rejected |
+| -5 | Rejected |
+| 25.5 | Accepted |
 
-### Actual results
+**What I learned:**
 
-For NULL:
-
-```text
-Runtime error: NOT NULL constraint failed: check_null_test_2.value (19)
-```
-
-For zero and negative values:
-
-```text
-Runtime error: CHECK constraint failed: value > 0 (19)
-```
-
-For 25.5, SQLite accepted the value.
-
-The final query:
-
-```sql
-SELECT * FROM check_null_test_2;
-```
-
-Returned:
-
-```text
-value
------
-25.5
-```
-
-**Explanation:**
-
-NOT NULL ensures that a value is provided, while CHECK validates whether the provided value satisfies the defined condition.
-
-Combining both constraints prevents missing and invalid values.
+NOT NULL makes sure that a value is provided. CHECK makes sure that the value follows the required condition.
 
 ---
 
-# Task B — Sharing with Another Pod
+# Task B — Pod Discussion
 
 ## 6. Most Surprising Finding
 
-One of the most surprising findings from our pod was that an unconstrained SQLite table accepted the text value `'hot'` in a column declared as REAL without producing an error.
+Our most surprising finding was that a normal SQLite table accepted the text `'hot'` in a column declared as REAL.
 
-Using `typeof()`, we observed that the value was stored as TEXT.
+We learned that normal SQLite tables can accept different data types in a column.
 
-SQLite attempts to convert values to the declared column type when possible. For example:
-- Text `'7'` can be converted into an integer.
-- Non-numeric text such as `'abc'` remains stored as TEXT.
+## 7. Hardest Concept
 
-**Key takeaway:** In ordinary SQLite tables, a declared data type is a type preference rather than a strict rule.
+The hardest concept for our pod was understanding CHECK and NULL.
 
-## 7. Hardest Constraint to Understand: CHECK with NULL
+We learned that CHECK alone does not reject NULL. We need NOT NULL if the value is required.
 
-The most challenging concept for our pod was understanding how CHECK constraints behave when handling NULL values.
+## 8. Other Findings
 
-For example:
+**UNIQUE and NULL**
 
-```sql
-CHECK(value BETWEEN -273.15 AND 5000)
-```
+A UNIQUE constraint can allow multiple NULL values.
 
-This constraint still accepts NULL values.
+**STRICT and Type Conversion**
 
-The reason is that SQLite rejects a row when the CHECK expression evaluates to FALSE. A comparison involving NULL evaluates to NULL (unknown), so the row is accepted.
-
-**Solution:** Combine CHECK with NOT NULL:
-
-```sql
-value REAL NOT NULL
-CHECK(value BETWEEN -273.15 AND 5000)
-```
-
-This ensures that a value is provided and that it follows the defined range.
-
-## 8. Additional Findings from the Pod Discussion
-
-### A. UNIQUE and NULL values
-
-A UNIQUE constraint on `(sensor_id, metric)` can accept multiple rows where `sensor_id` is NULL, even if the metric is identical.
-
-SQLite treats NULL values as distinct for UNIQUE constraint purposes.
-
-### B. STRICT and type conversion
-
-STRICT tables allow values that can be converted to the declared type without losing information.
-
-For example:
-- Text `'1.0'` can be converted to INTEGER `1`.
-- Decimal value `1.5` cannot be stored as INTEGER because conversion would lose its fractional part.
-
-These findings demonstrate that STRICT tables enforce data types more strictly than ordinary tables, but they still allow valid lossless conversions.
+STRICT tables can convert some values when the conversion does not lose information.
 
 ## 9. Agreed Points
 
-Based on our pod discussion, we identified the following points:
+Our pod agreed that:
 
-1. STRICT, NOT NULL, CHECK, and UNIQUE each enforce different aspects of data integrity. None completely replaces the others.
-2. A CHECK constraint on a nullable column does not prevent NULL values. NOT NULL must be added when a value is required.
-3. UNIQUE constraints do not treat NULL values as duplicates.
-4. A range check can prevent values outside a defined range, but it does not guarantee that every accepted value is physically realistic.
+1. Each constraint has a different purpose.
+2. CHECK alone does not prevent NULL.
+3. UNIQUE can allow multiple NULL values.
+4. A value can be accepted by the database but still be unrealistic.
 
-For example, a temperature of 4999 °C would pass a CHECK constraint with a maximum value of 5000, even though it may be unrealistic for the intended industrial application.
+## 10. Conclusion
 
-## 10. Unresolved Questions
-
-The following questions were raised for further discussion:
-
-1. Should plausible measurement ranges be defined separately for each metric using conditional CHECK expressions (such as CASE) or database triggers?
-2. Is it acceptable for STRICT tables to convert numeric text such as `'1.0'` into an INTEGER value?
-
-These questions were identified for further discussion with the class.
+I learned that constraints are important for keeping data correct. They help prevent duplicate IDs, missing values, invalid values, and incorrect data types.
 
 ---
 
-# 11. Overall Conclusion
+# Studio Task 1 — Prove the Constraints Work
 
-The experiments in Task A and the discussion in Task B demonstrated that maintaining data integrity requires more than simply declaring column data types.
+## 1. Objective
 
-Task A showed through practical SQLite experiments that an unconstrained table can accept questionable records, while a properly constrained table rejects invalid values, duplicate identifiers, and missing required data.
+The goal was to test if our database could reject invalid data.
 
-Task B expanded our understanding through additional observations about UNIQUE constraints, NULL values, STRICT type conversion, and the limitations of range checks.
+## 2. Sensor and Reading Tables
 
-The main lesson is that database constraints work together to protect data quality. However, technically valid data is not always realistic data. For industrial applications, database designers must consider both technical integrity and the physical meaning of the stored measurements.
+We created two tables: `sensor` and `reading`.
+
+The sensor table uses PRIMARY KEY, NOT NULL, CHECK, and UNIQUE constraints.
+
+The reading table uses FOREIGN KEY, NOT NULL, CHECK, and a generated column.
+
+The generated column calculates energy using:
+
+```sql
+energy_j = value * interval_s
+```
+
+## 3. Foreign Key Test
+
+We tried to insert a reading with sensor ID 99, which does not exist.
+
+```sql
+INSERT INTO reading(sensor_id, ts, value, interval_s)
+VALUES (99, '2026-11-05 12:40:00', 30.0, 10);
+```
+
+**Actual result:**
+
+```text
+Runtime error: FOREIGN KEY constraint failed (19)
+```
+
+The database rejected the record because the sensor ID does not exist.
+
+## 4. Generated Column
+
+The `energy_j` column calculates its value automatically.
+
+For example:
+
+```text
+41.5 * 10 = 415.0
+```
+
+**What I learned:**
+
+The database can calculate values automatically and prevent invalid records using constraints.
+
+---
+
+# Studio Task 2 — Idempotent Edge Ingestion with UPSERT
+
+## 1. Objective
+
+The goal was to insert sensor readings without creating duplicates when the same data is imported again.
+
+## 2. Unique Index
+
+We created a unique index using `sensor_id` and `ts`.
+
+```sql
+CREATE UNIQUE INDEX ux_reading_sensor_ts
+ON reading(sensor_id, ts);
+```
+
+This prevents the same sensor and timestamp from being stored more than once.
+
+## 3. UPSERT
+
+We used this SQL statement:
+
+```sql
+INSERT INTO reading (sensor_id, ts, value, interval_s)
+VALUES (?, ?, ?, ?)
+ON CONFLICT(sensor_id, ts)
+DO UPDATE SET value = excluded.value;
+```
+
+If the same sensor and timestamp already exist, SQLite updates the value instead of creating another row.
+
+## 4. Python Ingestion
+
+We created two files:
+
+- `Module04/readings.csv` — contains the sensor readings.
+- `Module04/ingest.py` — reads the CSV file and inserts the data into SQLite.
+
+The Python script uses `executemany()` to process multiple records.
+
+## 5. Testing
+
+We ran the Python script twice.
+
+| Execution | Result |
+|---|---|
+| First run | Successfully processed 2 readings |
+| Second run | Successfully processed 2 readings |
+
+We checked the database after both runs.
+
+**Actual result:**
+
+| Sensor ID | Timestamp | Value | Interval | Copies |
+|---|---|---:|---:|---:|
+| 1 | 2026-11-16 10:00:00 | 42.0 | 10 | 1 |
+| 3 | 2026-11-16 10:01:00 | 70.0 | 5 | 1 |
+
+Each reading appeared only once.
+
+## 6. Conclusion
+
+I learned that UPSERT helps prevent duplicate records. Even after running the Python script twice, the database still had only one record for each sensor and timestamp.
+
+---
+
+# Studio Task 3 — Triggers for Alarms and Audit
+
+## 1. Objective
+
+The goal was to create triggers that automatically save alarms and record changes in the database.
+
+## 2. Alarm Trigger
+
+We created an alarm table and a trigger for vibration readings.
+
+The trigger creates an alarm when vibration is higher than 2.0 mm/s.
+
+```sql
+CREATE TRIGGER trg_vib_alarm
+AFTER INSERT ON reading
+FOR EACH ROW
+WHEN NEW.value > 2.0
+AND (
+    SELECT metric
+    FROM sensor
+    WHERE sensor_id = NEW.sensor_id
+) = 'vib_rms'
+BEGIN
+    INSERT INTO alarm(sensor_id, ts, value, reason)
+    VALUES (
+        NEW.sensor_id,
+        NEW.ts,
+        NEW.value,
+        'vibration over 2.0 mm/s'
+    );
+END;
+```
+
+We tested it using a vibration value of 2.7.
+
+**Actual result:**
+
+```text
+1|2|2026-11-12 12:00:00|2.7|vibration over 2.0 mm/s
+```
+
+The alarm was created automatically.
+
+## 3. Audit Trigger
+
+We also created an audit table and a trigger to record changes in reading values.
+
+```sql
+CREATE TRIGGER trg_reading_audit
+AFTER UPDATE OF value ON reading
+FOR EACH ROW
+BEGIN
+    INSERT INTO audit(reading_id, old_value, new_value)
+    VALUES (NEW.reading_id, OLD.value, NEW.value);
+END;
+```
+
+We changed the value of reading ID 4 from 45.0 to 50.0.
+
+**Actual result:**
+
+```text
+1|4|45.0|50.0|2026-11-12 10:45:34
+```
+
+The audit table saved the old value and the new value.
+
+## 4. Trigger Benchmark
+
+We tested the time needed to insert 10,000 readings with and without a trigger.
+
+| Test | Records | Time |
+|---|---:|---:|
+| Without trigger | 10,000 | 0.009 seconds |
+| With trigger | 10,000 | 0.012 seconds |
+
+We also checked the results:
+
+- Readings inserted: 10,000
+- Alarm records generated: 10,000
+
+**What I learned:**
+
+Triggers can automatically create alarms and save changes. However, they can make database operations slightly slower.
+
+---
+
+# Studio Task 4 — Access Control Without a Server
+
+## 1. Objective
+
+The goal was to test how SQLite handles read-only access.
+
+## 2. Creating a View
+
+We created a view called `machine_health`.
+
+```sql
+CREATE VIEW machine_health AS
+SELECT
+    s.machine_id,
+    s.metric,
+    MAX(r.value) AS peak,
+    COUNT(*) AS n
+FROM sensor s
+JOIN reading r USING(sensor_id)
+GROUP BY s.machine_id, s.metric;
+```
+
+The view shows a summary of machine readings.
+
+## 3. Read-Only Test
+
+First, we changed the database file permission:
+
+```bash
+chmod 444 Module04/edge.db
+```
+
+Then we tested if we could read the database:
+
+```bash
+sqlite3 "file:Module04/edge.db?mode=ro" "SELECT COUNT(*) FROM reading;"
+```
+
+**Actual result:**
+
+```text
+5
+```
+
+The SELECT command worked.
+
+Next, we tried to delete records:
+
+```bash
+sqlite3 "file:Module04/edge.db?mode=ro" "DELETE FROM reading;"
+```
+
+**Actual error:**
+
+```text
+Error: stepping, attempt to write a readonly database (8)
+```
+
+SQLite did not allow the DELETE command.
+
+## 4. Restoring Permission
+
+After the test, we restored write permission:
+
+```bash
+chmod 644 Module04/edge.db
+```
+
+## 5. SQLite and PostgreSQL
+
+SQLite does not have GRANT and REVOKE commands like PostgreSQL. PostgreSQL uses users and roles to control who can access the database. SQLite can use file permissions and read-only connections instead. This is useful for a local database, but it is not enough for a web application with many users who need different permissions.
+
+## 6. Conclusion
+
+I learned that SQLite can restrict writing by using read-only connections and file permissions. These features are useful for local database applications.
+
+---
+
+# Overall Module 4 Conclusion
+
+In this module, I learned how to protect data using SQLite constraints.
+
+I also learned how to use UPSERT to prevent duplicate readings and triggers to create alarms and record changes automatically.
+
+Finally, I tested how to make the database read-only using file permissions and read-only connections.
+
+This module helped me understand how SQLite can protect data and perform important tasks without needing a separate database server.
