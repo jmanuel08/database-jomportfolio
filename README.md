@@ -6,7 +6,7 @@ Sebastian Emmanuel Soon, [portfolio link](https://github.com/Emannual20/database
 
 In my team for the final project, I also had the following members:
 
-- Htet Naing, [[portfolio link](https://github.com/htetnaing28/database-htetportfolilo)
+- Htet Naing, [portfolio link](https://github.com/htetnaing28/database-htetportfolilo)
 - Isa Babayev, [portfolio link](https://github.com/isa-babayev-ibabayev/databases-portfolio/tree/main)
 - Myo Min Lin, [portfolio link](https://github.com/mmlin801597/databases-portfolio/tree/main)
 
