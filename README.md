@@ -2,12 +2,13 @@ Author: Jomarie Chris Manuel
 
 My partner is Sanjay Pachan Maheshwari, [portfolio link](https://github.com/yajnas-crpto/databases_portfolio_sanjay)
 Sebastian Emmanuel Soon, [portfolio link](https://github.com/Emannual20/databases-portfolio)
-Myo Min Lin, [portfolio link](https://github.com/mmlin801597/databases-portfolio/tree/main)
+
 
 In my team for the final project, I also had the following members:
-- Rayan Slassi, [portfolio link](https://github.com/rayansls/Databases)
-- Jonathan Behring, [portfolio link](https://github.com/Jonathan-T-B/databasesclass)
-- Aron Grudaj, [portfolio link](https://github.com/AronGrudaj/Databases-Portfolio)
+
+- Htet Naing, [[portfolio link](https://github.com/htetnaing28/database-htetportfolilo)
+- Isa Babayev, [portfolio link](https://github.com/isa-babayev-ibabayev/databases-portfolio/tree/main)
+- Myo Min Lin, [portfolio link](https://github.com/mmlin801597/databases-portfolio/tree/main)
 
 Our team final project repository is [here](https://github.com/somewhere/final-iot-project)
 
