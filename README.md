@@ -10,6 +10,12 @@ In my team for the final project, I also had the following members:
 - Isa Babayev, [portfolio link](https://github.com/isa-babayev-ibabayev/databases-portfolio/tree/main)
 - Myo Min Lin, [portfolio link](https://github.com/mmlin801597/databases-portfolio/tree/main)
 
+- Rayan Slassi, [portfolio link](https://github.com/rayansls/Databases)
+- Jonathan Behring, [portfolio link](https://github.com/Jonathan-T-B/databasesclass)
+- Aron Grudaj, [portfolio link](https://github.com/AronGrudaj/Databases-Portfolio)
+
+
+
 Our team final project repository is [here](https://github.com/somewhere/final-iot-project)
 
 My personal profile and expectations, you can find [here](Module01/README.md#task-personal-profile).
